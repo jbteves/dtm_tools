@@ -47,28 +47,32 @@ def get_table_type(table: pd.DataFrame) -> str:
             return "minimal-dtm"
 
 
-
 def get_classification(row: pd.Series) -> str:
     """Get the classification of a row/component.
 
     row: the row to get the classification of.
 
-    Returns one of ("A", "I", "R").
+    Returns one of ("A", "R").
     """
     if row["classification"] == "rejected":
         return "R"
+    else:
+        return "A"
+
+
+def get_classification_verbose(row: pd.Series) -> str:
+    """Get the verbose classification of a row/component.
+
+    row: the row to get the classification of.
+
+    Returns one of ("A", "R").
+    """
+    if row["classification"] == "rejected":
+        return "R"
+    elif row["classification"] == "accepted":
+        return "A"
     elif row["classification"] == "ignored":
         return "I"
-    elif row["classification"] == "accepted":
-        # tags indicate ignored for kundu DTM
-        if TAG in row and (
-            "Low variance" in row[TAG] or
-            "Accept borderline" in row[TAG] or 
-            "No provisional accept" in row[TAG]
-        ):
-            return "I"
-        else:
-            return "A"
 
 
 def main():
@@ -159,6 +163,9 @@ def main():
         rtkeys = RATIONALE_TABLE.keys()
 
         for c in comps:
+            lcomp_verb_class = get_classification_verbose(ltable.iloc[c])
+            rcomp_verb_class = get_classification_verbose(rtable.iloc[c])
+            verbose_summary = lcomp_verb_class + '->' + rcomp_verb_class
             lcomp_val = ltable.iloc[c][lcol]
             rcomp_val = rtable.iloc[c][rcol]
             if lcomp_val in rtkeys:
@@ -169,7 +176,7 @@ def main():
                 lcomp_val = 'N/A'
             if str(rcomp_val) == "nan":
                 rcomp_val = 'N/A'
-            print(f"{c}:\t{lcomp_val}\t{rcomp_val}")
+            print(f"{c:03}:\t{verbose_summary}\t{lcomp_val}\t{rcomp_val}")
 
 
 
