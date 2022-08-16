@@ -184,7 +184,7 @@ def main():
             if str(rcomp_val) == "nan":
                 rcomp_val = 'N/A'
             print(
-                    f"{c:03}:\t{verbose_summary:8} {lcomp_val:20}{rcomp_val:20}\t{varex:4.2}"
+                    f"{c:03}:\t{verbose_summary:8} {lcomp_val:20}{rcomp_val:20}\t{varex:<4.2}"
             )
 
 
