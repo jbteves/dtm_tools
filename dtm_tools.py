@@ -161,13 +161,20 @@ def main():
         else:
             rcol = 'rationale'
         rtkeys = RATIONALE_TABLE.keys()
-
+       
+        VERB_SUMMARY = "Change"
+        LCOMP_SUMMARY = "Left"
+        RCOMP_SUMMARY = "Right"
+        print(
+                f"N  :\t{VERB_SUMMARY:8} {LCOMP_SUMMARY:20}{RCOMP_SUMMARY:20}\tVariance"
+        )
         for c in comps:
             lcomp_verb_class = get_classification_verbose(ltable.iloc[c])
             rcomp_verb_class = get_classification_verbose(rtable.iloc[c])
             verbose_summary = lcomp_verb_class + '->' + rcomp_verb_class
             lcomp_val = ltable.iloc[c][lcol]
             rcomp_val = rtable.iloc[c][rcol]
+            varex = ltable.iloc[c]["variance explained"]
             if lcomp_val in rtkeys:
                 lcomp_val = RATIONALE_TABLE[lcomp_val]
             if rcomp_val in rtkeys:
@@ -176,7 +183,9 @@ def main():
                 lcomp_val = 'N/A'
             if str(rcomp_val) == "nan":
                 rcomp_val = 'N/A'
-            print(f"{c:03}:\t{verbose_summary}\t{lcomp_val}\t{rcomp_val}")
+            print(
+                    f"{c:03}:\t{verbose_summary:8} {lcomp_val:20}{rcomp_val:20}\t{varex:4.2}"
+            )
 
 
 
