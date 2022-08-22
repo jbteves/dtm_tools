@@ -17,6 +17,13 @@ git remote add jbteves https://github.com/jbteves/tedana.git
 git fetch jbteves JT_DTM
 ```
 
+Install it into your current environment (you may want a different one than the one you have activated!)
+
+```
+cd ~/repositories/tedana
+pip install -e .
+```
+
 Get this tool by running
 ```
 cd ~/repositories
