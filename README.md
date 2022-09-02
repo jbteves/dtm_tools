@@ -94,5 +94,5 @@ python ~/repositories/dtm_tools/dtm_tool.py main_tedana_results/desc-tedana_metr
 For more options see
 
 ```
-python ~/repositories/dtm_tools/dtm_tool.py -h
+python ~/repositories/dtm_tools/dtm_tools.py -h
 ```
