@@ -96,3 +96,14 @@ For more options see
 ```
 python ~/repositories/dtm_tools/dtm_tools.py -h
 ```
+
+To run the kundu tree instead of the minimal tree, use the following call:
+
+```
+tedana \
+    -d DATA_FILES \
+    -e ECHO_TIMES \
+    --tree kundu \
+    --out-dir dtm_tedana_results \
+    --mix main_tedana_results/desc-ICA_mixing.tsv
+```
